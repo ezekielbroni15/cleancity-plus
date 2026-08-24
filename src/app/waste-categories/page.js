@@ -1,3 +1,5 @@
+"use client";
+
 import { Accordion, Container } from "react-bootstrap";
 import { wasteCategories } from "@/data/wasteCategories";
 
