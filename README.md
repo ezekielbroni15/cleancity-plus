@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CleanCity+
+
+CleanCity+ is an interactive waste management tracker built with Next.js and React. It helps users learn waste categories, log recycling activity, visualize progress, earn category badges, and make personal recycling pledges.
+
+## Features
+
+- Home page with a responsive hero, key recycling stats, and a no-repeat random fact generator.
+- Waste Categories page with React-Bootstrap accordion content loaded from `src/data/wasteCategories.js`.
+- Recycling Tracker with create, read, update, delete, confirmation dialogs, validation, localStorage persistence, search, sort, badges, and a Recharts bar chart.
+- Pledge page with validated pledge submission, localStorage persistence, and a live total counter.
+- Required tests for localStorage persistence, form validation, and recycling search/sort logic.
+
+## Architecture
+
+- `src/components`: focused UI pieces such as `TrackerForm`, `TrackerTable`, `Chart`, `PledgeForm`, and `ConfirmDialog`.
+- `src/hooks`: reusable logic for persistence, recycling logs, and pledges.
+- `src/data`: static facts and category guidance.
+- `src/app`: Next.js routes for Home, Waste Categories, Recycling Tracker, and Pledge.
+
+The tracker keeps filtering, sorting, totals, CRUD actions, and persistence in `useRecyclingLog`, so the table component only renders the already-prepared data. Pledges follow the same pattern through `usePledges`, and both features share the generic `useLocalStorage` hook.
+
+## Advanced Pattern
+
+This project uses the render-prop option through `ConfirmDialog`. The component manages its own modal open and close state, then gives callers a `confirm` function through `render`. The same dialog is reused for deleting a tracker entry and confirming an edit save, which keeps important actions consistent without hard-coding the dialog to one table action.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in a browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Quality Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm test
+npm run build
+```
