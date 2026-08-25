@@ -28,15 +28,110 @@ export default function TrackerTable({
     setEditError("");
   };
 
-  const confirmEdit = (id) => {
+  const validateDraftQuantity = () => {
     const nextQuantity = Number(draftQuantity);
     if (!Number.isInteger(nextQuantity) || nextQuantity <= 0) {
       setEditError("Use a positive whole number before saving.");
-      return;
+      return null;
     }
+    setEditError("");
+    return nextQuantity;
+  };
+
+  const requestSave = (confirm) => {
+    if (validateDraftQuantity() === null) return;
+    confirm();
+  };
+
+  const confirmEdit = (id) => {
+    const nextQuantity = validateDraftQuantity();
+    if (nextQuantity === null) return;
     onEdit(id, nextQuantity);
     setEditingId(null);
     setEditError("");
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setDraftQuantity("");
+    setEditError("");
+  };
+
+  const handleEditKeyDown = (event, confirm) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      requestSave(confirm);
+    }
+    if (event.key === "Escape") {
+      event.preventDefault();
+      cancelEdit();
+    }
+  };
+
+  const renderEditControl = (entry) => (
+    <ConfirmDialog
+      title="Save quantity change?"
+      message={`Update ${entry.category} from ${entry.quantity} to ${draftQuantity || "this"} item(s)?`}
+      confirmLabel="Save"
+      variant="primary"
+      tone="primary"
+      onConfirm={() => confirmEdit(entry.id)}
+      render={(confirm) => (
+        <Form.Control
+          aria-label={`Quantity for ${entry.category}`}
+          value={draftQuantity}
+          onChange={(event) => setDraftQuantity(event.target.value)}
+          onKeyDown={(event) => handleEditKeyDown(event, confirm)}
+          className="quantity-edit"
+        />
+      )}
+    />
+  );
+
+  const renderActions = (entry) => {
+    const isEditing = editingId === entry.id;
+
+    if (isEditing) {
+      return (
+        <>
+          <ConfirmDialog
+            title="Save quantity change?"
+            message={`Update ${entry.category} to ${draftQuantity || "this"} item(s)?`}
+            confirmLabel="Save"
+            variant="primary"
+            tone="primary"
+            onConfirm={() => confirmEdit(entry.id)}
+            render={(confirm) => (
+              <Button aria-label="Save edit" size="sm" variant="outline-primary" onClick={() => requestSave(confirm)}>
+                <Check aria-hidden="true" size={15} />
+              </Button>
+            )}
+          />
+          <Button aria-label="Cancel edit" size="sm" variant="outline-secondary" onClick={cancelEdit}>
+            <X aria-hidden="true" size={15} />
+          </Button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Button aria-label={`Edit ${entry.category}`} size="sm" variant="outline-primary" onClick={() => startEdit(entry)}>
+          <Edit3 aria-hidden="true" size={15} />
+        </Button>
+        <ConfirmDialog
+          title="Delete recycling entry?"
+          message={`Remove ${entry.quantity} ${entry.category} item(s) from the tracker?`}
+          confirmLabel="Delete"
+          onConfirm={() => onDelete(entry.id)}
+          render={(confirm) => (
+            <Button aria-label={`Delete ${entry.category}`} size="sm" variant="outline-danger" onClick={confirm}>
+              <Trash2 aria-hidden="true" size={15} />
+            </Button>
+          )}
+        />
+      </>
+    );
   };
 
   return (
@@ -84,80 +179,57 @@ export default function TrackerTable({
           onAction={totalEntries > 0 ? () => setSearchTerm("") : undefined}
         />
       ) : (
-        <div className="responsive-table">
-          <Table hover responsive className="align-middle">
-            <thead>
-              <tr>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>Date</th>
-                <th className="text-end">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {entries.map((entry) => (
-                <tr key={entry.id}>
-                  <td>
-                    <span className="category-pill">{entry.category}</span>
-                  </td>
-                  <td>
-                    {editingId === entry.id ? (
-                      <Form.Control
-                        aria-label={`Quantity for ${entry.category}`}
-                        value={draftQuantity}
-                        onChange={(event) => setDraftQuantity(event.target.value)}
-                        className="quantity-edit"
-                      />
-                    ) : (
-                      entry.quantity
-                    )}
-                  </td>
-                  <td>{new Date(entry.createdAt).toLocaleDateString()}</td>
-                  <td>
-                    <div className="table-actions">
-                      {editingId === entry.id ? (
-                        <>
-                          <ConfirmDialog
-                            title="Save quantity change?"
-                            message={`Update ${entry.category} to ${draftQuantity || "this"} item(s)?`}
-                            confirmLabel="Save"
-                            variant="primary"
-                            onConfirm={() => confirmEdit(entry.id)}
-                            render={(confirm) => (
-                              <Button aria-label="Save edit" size="sm" variant="outline-primary" onClick={confirm}>
-                                <Check aria-hidden="true" size={15} />
-                              </Button>
-                            )}
-                          />
-                          <Button aria-label="Cancel edit" size="sm" variant="outline-secondary" onClick={() => setEditingId(null)}>
-                            <X aria-hidden="true" size={15} />
-                          </Button>
-                        </>
-                      ) : (
-                        <>
-                          <Button aria-label={`Edit ${entry.category}`} size="sm" variant="outline-primary" onClick={() => startEdit(entry)}>
-                            <Edit3 aria-hidden="true" size={15} />
-                          </Button>
-                          <ConfirmDialog
-                            title="Delete recycling entry?"
-                            message={`Remove ${entry.quantity} ${entry.category} item(s) from the tracker?`}
-                            confirmLabel="Delete"
-                            onConfirm={() => onDelete(entry.id)}
-                            render={(confirm) => (
-                              <Button aria-label={`Delete ${entry.category}`} size="sm" variant="outline-danger" onClick={confirm}>
-                                <Trash2 aria-hidden="true" size={15} />
-                              </Button>
-                            )}
-                          />
-                        </>
-                      )}
-                    </div>
-                  </td>
+        <>
+          <div className="responsive-table">
+            <Table hover responsive className="align-middle">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Quantity</th>
+                  <th>Date</th>
+                  <th className="text-end">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+              </thead>
+              <tbody>
+                {entries.map((entry) => {
+                  const isEditing = editingId === entry.id;
+
+                  return (
+                    <tr key={entry.id} className={isEditing ? "editing-row" : ""}>
+                      <td>
+                        <span className="category-pill">{entry.category}</span>
+                      </td>
+                      <td>{isEditing ? renderEditControl(entry) : entry.quantity}</td>
+                      <td>{new Date(entry.createdAt).toLocaleDateString()}</td>
+                      <td>
+                        <div className="table-actions">{renderActions(entry)}</div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+          <div className="mobile-log-list" aria-label="Recycling entries mobile list">
+            {entries.map((entry) => {
+              const isEditing = editingId === entry.id;
+
+              return (
+                <article key={entry.id} className={`mobile-log-card ${isEditing ? "editing-row" : ""}`}>
+                  <div>
+                    <span className="category-pill">{entry.category}</span>
+                    <time dateTime={entry.createdAt}>{new Date(entry.createdAt).toLocaleDateString()}</time>
+                  </div>
+                  <div className="mobile-log-meta">
+                    <span>Quantity</span>
+                    <div className="mobile-log-quantity">{isEditing ? renderEditControl(entry) : <strong>{entry.quantity}</strong>}</div>
+                  </div>
+                  <div className="table-actions">{renderActions(entry)}</div>
+                </article>
+              );
+            })}
+          </div>
+        </>
       )}
     </section>
   );

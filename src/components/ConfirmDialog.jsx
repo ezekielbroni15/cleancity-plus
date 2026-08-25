@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { AlertTriangle, CheckCircle2 } from "lucide-react";
 
 export default function ConfirmDialog({
   title = "Confirm action",
@@ -10,7 +11,8 @@ export default function ConfirmDialog({
   cancelLabel = "Cancel",
   variant = "danger",
   onConfirm,
-  render
+  render,
+  tone = variant === "danger" ? "danger" : "primary"
 }) {
   const [open, setOpen] = useState(false);
 
@@ -24,11 +26,22 @@ export default function ConfirmDialog({
   return (
     <>
       {render(show)}
-      <Modal show={open} onHide={hide} centered>
+      <Modal show={open} onHide={hide} centered dialogClassName={`confirm-dialog confirm-dialog-${tone}`}>
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title>
+            <span className="confirm-dialog-icon">
+              {tone === "danger" ? (
+                <AlertTriangle aria-hidden="true" size={20} />
+              ) : (
+                <CheckCircle2 aria-hidden="true" size={20} />
+              )}
+            </span>
+            {title}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>{message}</Modal.Body>
+        <Modal.Body>
+          <p>{message}</p>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-secondary" onClick={hide}>
             {cancelLabel}
