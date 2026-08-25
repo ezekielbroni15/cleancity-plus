@@ -56,6 +56,7 @@ export default function RecyclingTrackerPage() {
               {item.total >= 10 && <Badge label="10+ earned" />}
               <span>{item.category}</span>
               <strong>{item.total}</strong>
+              <small>{item.total >= 10 ? "Badge unlocked" : `${10 - item.total} item(s) to badge`}</small>
               <div className="progress-track">
                 <span style={{ width: `${Math.min((item.total / 10) * 100, 100)}%` }} />
               </div>
