@@ -1,6 +1,8 @@
 "use client";
 
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { BarChart3 } from "lucide-react";
+import EmptyState from "./EmptyState";
 
 export default function Chart({ data }) {
   const hasData = data.some((item) => item.total > 0);
@@ -30,8 +32,12 @@ export default function Chart({ data }) {
             <span />
             <span />
           </div>
-          <strong>No chart data yet</strong>
-          <p>Your category totals will appear as soon as you add recycled items.</p>
+          <EmptyState
+            icon={BarChart3}
+            tone="chart"
+            title="No chart data yet"
+            message="Your category totals will appear as soon as you add recycled items."
+          />
         </div>
       )}
     </section>

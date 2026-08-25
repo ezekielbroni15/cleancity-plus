@@ -53,6 +53,7 @@ export default function RecyclingTrackerPage() {
           setSortDirection={log.setSortDirection}
           onEdit={log.editEntry}
           onDelete={log.deleteEntry}
+          totalEntries={log.entries.length}
         />
       </Container>
     </main>

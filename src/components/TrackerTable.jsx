@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
-import { Check, Edit3, Search, Trash2, X } from "lucide-react";
+import { Check, Edit3, Inbox, Search, SearchX, Trash2, X } from "lucide-react";
 import ConfirmDialog from "./ConfirmDialog";
+import EmptyState from "./EmptyState";
 
 export default function TrackerTable({
   entries,
@@ -14,7 +15,8 @@ export default function TrackerTable({
   sortDirection,
   setSortDirection,
   onEdit,
-  onDelete
+  onDelete,
+  totalEntries = entries.length
 }) {
   const [editingId, setEditingId] = useState(null);
   const [draftQuantity, setDraftQuantity] = useState("");
@@ -70,10 +72,17 @@ export default function TrackerTable({
       </div>
       {editError && <p className="field-error">{editError}</p>}
       {entries.length === 0 ? (
-        <div className="empty-state">
-          <strong>No matching recycling logs yet.</strong>
-          <span>Add a category and quantity to see entries here.</span>
-        </div>
+        <EmptyState
+          icon={totalEntries > 0 ? SearchX : Inbox}
+          title={totalEntries > 0 ? "No matching recycling logs." : "No recycling logs yet."}
+          message={
+            totalEntries > 0
+              ? "Try another category search or clear the search box."
+              : "Add a category and quantity to see entries here."
+          }
+          actionLabel={totalEntries > 0 ? "Clear search" : undefined}
+          onAction={totalEntries > 0 ? () => setSearchTerm("") : undefined}
+        />
       ) : (
         <div className="responsive-table">
           <Table hover responsive className="align-middle">
