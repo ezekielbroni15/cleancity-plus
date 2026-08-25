@@ -1,14 +1,39 @@
 "use client";
 
+import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Badge from "@/components/Badge";
 import Chart from "@/components/Chart";
+import FeedbackToast from "@/components/FeedbackToast";
 import TrackerForm from "@/components/TrackerForm";
 import TrackerTable from "@/components/TrackerTable";
 import { useRecyclingLog } from "@/hooks/useRecyclingLog";
 
 export default function RecyclingTrackerPage() {
   const log = useRecyclingLog();
+  const [notice, setNotice] = useState("");
+
+  const showNotice = (message) => {
+    setNotice("");
+    window.setTimeout(() => setNotice(message), 0);
+  };
+
+  const addEntry = (entry) => {
+    log.addEntry(entry);
+    showNotice(`${entry.quantity} ${entry.category} item(s) added.`);
+  };
+
+  const editEntry = (id, quantity) => {
+    const current = log.entries.find((entry) => entry.id === id);
+    log.editEntry(id, quantity);
+    showNotice(`${current?.category || "Entry"} updated to ${quantity} item(s).`);
+  };
+
+  const deleteEntry = (id) => {
+    const current = log.entries.find((entry) => entry.id === id);
+    log.deleteEntry(id);
+    showNotice(`${current?.category || "Entry"} removed from the tracker.`);
+  };
 
   return (
     <main className="page-shell">
@@ -39,7 +64,7 @@ export default function RecyclingTrackerPage() {
         </section>
 
         <section className="tracker-layout">
-          <TrackerForm onAdd={log.addEntry} />
+          <TrackerForm onAdd={addEntry} />
           <Chart data={log.categoryTotals} />
         </section>
 
@@ -51,10 +76,11 @@ export default function RecyclingTrackerPage() {
           setSortBy={log.setSortBy}
           sortDirection={log.sortDirection}
           setSortDirection={log.setSortDirection}
-          onEdit={log.editEntry}
-          onDelete={log.deleteEntry}
+          onEdit={editEntry}
+          onDelete={deleteEntry}
           totalEntries={log.entries.length}
         />
+        <FeedbackToast message={notice} show={Boolean(notice)} onClose={() => setNotice("")} />
       </Container>
     </main>
   );

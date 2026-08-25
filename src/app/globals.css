@@ -770,6 +770,21 @@ textarea:focus-visible,
   line-height: 1.65;
 }
 
+.feedback-toast-wrap {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1080;
+}
+
+.feedback-toast-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: 800;
+}
+
 .editing-row td,
 .mobile-log-card.editing-row {
   background: rgba(22, 199, 183, 0.09) !important;
