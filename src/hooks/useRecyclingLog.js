@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { categoryNames } from "@/data/wasteCategories";
 import { useLocalStorage } from "./useLocalStorage";
 
+const EMPTY_ENTRIES = [];
+
 export function deriveRecyclingEntries(entries, searchTerm, sortBy, sortDirection) {
   const query = searchTerm.trim().toLowerCase();
 
@@ -30,7 +32,7 @@ export function getCategoryTotals(entries) {
 }
 
 export function useRecyclingLog(initialEntries) {
-  const [entries, setEntries] = useLocalStorage("cleancity-recycling-log", initialEntries ?? []);
+  const [entries, setEntries] = useLocalStorage("cleancity-recycling-log", initialEntries ?? EMPTY_ENTRIES);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("category");
   const [sortDirection, setSortDirection] = useState("asc");
