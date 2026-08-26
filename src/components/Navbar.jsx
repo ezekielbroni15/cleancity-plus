@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container, Nav, Navbar as BsNavbar } from "react-bootstrap";
 import { BarChart3, Home, Layers3, Leaf, MessageSquareHeart } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "/", label: "Home", icon: Home },
@@ -33,6 +34,7 @@ export default function Navbar() {
                 {label}
               </Link>
             ))}
+            <ThemeToggle />
           </Nav>
         </BsNavbar.Collapse>
       </Container>
