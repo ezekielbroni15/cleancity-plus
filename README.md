@@ -8,6 +8,7 @@ CleanCity+ is an interactive waste management tracker built with Next.js and Rea
 - Waste Categories page with React-Bootstrap accordion content loaded from `src/data/wasteCategories.js`.
 - Recycling Tracker with create, read, update, delete, confirmation dialogs, validation, localStorage persistence, search, sort, badges, and a Recharts bar chart.
 - Pledge page with validated pledge submission, localStorage persistence, and a live total counter.
+- Stretch features: persisted dark mode, tracker CSV export, richer badge unlock animation, and additional dashboard statistics.
 - Required tests for localStorage persistence, form validation, and recycling search/sort logic.
 
 ## Architecture
