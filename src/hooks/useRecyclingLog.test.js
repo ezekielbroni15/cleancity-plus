@@ -1,4 +1,4 @@
-import { deriveRecyclingEntries } from "./useRecyclingLog";
+import { deriveRecyclingEntries, getCategoryTotals, getDashboardStats } from "./useRecyclingLog";
 
 test("useRecyclingLog search and sort logic returns filtered sorted entries", () => {
   const entries = [
@@ -14,4 +14,23 @@ test("useRecyclingLog search and sort logic returns filtered sorted entries", ()
     { id: "4", category: "Plastic", quantity: 15 },
     { id: "1", category: "Plastic", quantity: 4 }
   ]);
+});
+
+test("useRecyclingLog dashboard stats summarize entries and badges", () => {
+  const entries = [
+    { id: "1", category: "Plastic", quantity: 12 },
+    { id: "2", category: "Glass", quantity: 4 }
+  ];
+  const totals = getCategoryTotals(entries);
+  const earnedBadges = totals.filter((item) => item.total >= 10);
+  const stats = getDashboardStats(entries, totals, earnedBadges);
+
+  expect(stats).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ key: "totalEntries", value: 2 }),
+      expect.objectContaining({ key: "activeCategories", value: 2 }),
+      expect.objectContaining({ key: "earnedBadges", value: 1 }),
+      expect.objectContaining({ key: "leadingCategory", value: "Plastic" })
+    ])
+  );
 });

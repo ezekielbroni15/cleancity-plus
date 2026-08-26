@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Container } from "react-bootstrap";
 import Badge from "@/components/Badge";
 import Chart from "@/components/Chart";
+import DashboardStats from "@/components/DashboardStats";
 import ExportCsvButton from "@/components/ExportCsvButton";
 import FeedbackToast from "@/components/FeedbackToast";
 import TrackerForm from "@/components/TrackerForm";
@@ -58,6 +59,8 @@ export default function RecyclingTrackerPage() {
             onEmpty={() => showNotice("Add a recycling log before exporting CSV.")}
           />
         </div>
+
+        <DashboardStats stats={log.dashboardStats} />
 
         <section className="summary-grid" aria-label="Category badge progress">
           {log.categoryTotals.map((item) => (

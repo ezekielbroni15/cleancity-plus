@@ -31,6 +31,41 @@ export function getCategoryTotals(entries) {
   }));
 }
 
+export function getDashboardStats(entries, categoryTotals, earnedBadges) {
+  const activeCategories = categoryTotals.filter((item) => item.total > 0);
+  const leadingCategory = [...categoryTotals].sort((a, b) => b.total - a.total)[0];
+  const averageQuantity = entries.length
+    ? Math.round((categoryTotals.reduce((sum, item) => sum + item.total, 0) / entries.length) * 10) / 10
+    : 0;
+
+  return [
+    {
+      key: "totalEntries",
+      label: "Log entries",
+      value: entries.length,
+      help: `${averageQuantity} avg item(s) per entry`
+    },
+    {
+      key: "activeCategories",
+      label: "Active streams",
+      value: activeCategories.length,
+      help: `${categoryTotals.length - activeCategories.length} still untouched`
+    },
+    {
+      key: "earnedBadges",
+      label: "Badges earned",
+      value: earnedBadges.length,
+      help: "Categories above 10 items"
+    },
+    {
+      key: "leadingCategory",
+      label: "Leading stream",
+      value: leadingCategory?.total ? leadingCategory.category : "None yet",
+      help: leadingCategory?.total ? `${leadingCategory.total} item(s) recycled` : "Add logs to reveal it"
+    }
+  ];
+}
+
 export function useRecyclingLog(initialEntries) {
   const [entries, setEntries] = useLocalStorage("cleancity-recycling-log", initialEntries ?? EMPTY_ENTRIES);
   const [searchTerm, setSearchTerm] = useState("");
@@ -67,6 +102,10 @@ export function useRecyclingLog(initialEntries) {
   const categoryTotals = useMemo(() => getCategoryTotals(entries), [entries]);
   const totalItems = categoryTotals.reduce((sum, item) => sum + item.total, 0);
   const earnedBadges = categoryTotals.filter((item) => item.total >= 10);
+  const dashboardStats = useMemo(
+    () => getDashboardStats(entries, categoryTotals, earnedBadges),
+    [categoryTotals, earnedBadges, entries]
+  );
 
   return {
     entries,
@@ -74,6 +113,7 @@ export function useRecyclingLog(initialEntries) {
     categoryTotals,
     totalItems,
     earnedBadges,
+    dashboardStats,
     addEntry,
     editEntry,
     deleteEntry,
