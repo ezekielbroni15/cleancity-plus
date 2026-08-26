@@ -465,6 +465,16 @@ textarea:focus-visible,
   gap: 20px;
 }
 
+.tracker-command-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: -4px 0 8px;
+}
+
+.export-button.btn {
+  min-width: 148px;
+}
+
 .total-chip {
   flex: 0 0 auto;
   min-width: 160px;
@@ -1017,6 +1027,14 @@ textarea:focus-visible,
 
   .theme-toggle {
     justify-content: space-between;
+    width: 100%;
+  }
+
+  .tracker-command-row {
+    justify-content: stretch;
+  }
+
+  .export-button.btn {
     width: 100%;
   }
 }
