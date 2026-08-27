@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 
@@ -15,6 +15,8 @@ export default function ConfirmDialog({
   tone = variant === "danger" ? "danger" : "primary"
 }) {
   const [open, setOpen] = useState(false);
+  const titleId = useId();
+  const messageId = useId();
 
   const show = () => setOpen(true);
   const hide = () => setOpen(false);
@@ -26,9 +28,16 @@ export default function ConfirmDialog({
   return (
     <>
       {render(show)}
-      <Modal show={open} onHide={hide} centered dialogClassName={`confirm-dialog confirm-dialog-${tone}`}>
+      <Modal
+        show={open}
+        onHide={hide}
+        centered
+        dialogClassName={`confirm-dialog confirm-dialog-${tone}`}
+        aria-labelledby={titleId}
+        aria-describedby={messageId}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>
+          <Modal.Title id={titleId}>
             <span className="confirm-dialog-icon">
               {tone === "danger" ? (
                 <AlertTriangle aria-hidden="true" size={20} />
@@ -40,7 +49,7 @@ export default function ConfirmDialog({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>{message}</p>
+          <p id={messageId}>{message}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-secondary" onClick={hide}>

@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import SkipLink from "@/components/SkipLink";
 
 export const metadata = {
   title: {
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <SkipLink />
         <Navbar />
         {children}
         <ServiceWorkerRegister />

@@ -11,7 +11,7 @@ const highlights = [
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <section className="hero-section">
         <Container fluid="xxl" className="hero-grid">
           <div className="hero-copy">

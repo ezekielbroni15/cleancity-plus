@@ -8,10 +8,10 @@ export default function Chart({ data }) {
   const hasData = data.some((item) => item.total > 0);
 
   return (
-    <section className="surface-panel chart-panel">
+    <section className="surface-panel chart-panel" aria-labelledby="category-total-chart-title">
       <div>
         <span className="eyebrow">Live visualization</span>
-        <h2>Totals by category</h2>
+        <h2 id="category-total-chart-title">Totals by category</h2>
       </div>
       {hasData ? (
         <ResponsiveContainer width="100%" height={320}>

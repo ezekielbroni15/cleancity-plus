@@ -83,6 +83,8 @@ export default function TrackerTable({
           onChange={(event) => setDraftQuantity(event.target.value)}
           onKeyDown={(event) => handleEditKeyDown(event, confirm)}
           className="quantity-edit"
+          isInvalid={Boolean(editError)}
+          aria-describedby={editError ? "tracker-edit-error" : undefined}
         />
       )}
     />
@@ -165,7 +167,11 @@ export default function TrackerTable({
           </Form.Select>
         </div>
       </div>
-      {editError && <p className="field-error">{editError}</p>}
+      {editError && (
+        <p id="tracker-edit-error" className="field-error" role="alert">
+          {editError}
+        </p>
+      )}
       {entries.length === 0 ? (
         <EmptyState
           icon={totalEntries > 0 ? SearchX : Inbox}

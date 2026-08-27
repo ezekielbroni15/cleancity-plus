@@ -5,7 +5,7 @@ import { wasteCategories } from "@/data/wasteCategories";
 
 export default function WasteCategoriesPage() {
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell" tabIndex={-1}>
       <Container fluid="xxl">
         <header className="page-header">
           <span className="eyebrow">Sorting guide</span>

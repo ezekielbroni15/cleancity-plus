@@ -9,7 +9,7 @@ export default function PledgePage() {
   const { pledges, addPledge, pledgeCount } = usePledges();
 
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell" tabIndex={-1}>
       <Container fluid="xxl">
         <header className="page-header tracker-header">
           <div>

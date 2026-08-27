@@ -32,7 +32,11 @@ export default function PledgeForm({ onAdd }) {
     <Form className="surface-panel pledge-form" onSubmit={submit} noValidate>
       <span className="eyebrow">Personal commitment</span>
       <h2>Make a pledge</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && (
+        <Alert variant="danger" role="alert">
+          {error}
+        </Alert>
+      )}
       <Form.Group controlId="pledge-text">
         <Form.Label>Your pledge</Form.Label>
         <Form.Control
@@ -42,9 +46,10 @@ export default function PledgeForm({ onAdd }) {
           value={text}
           onChange={(event) => setText(event.target.value)}
           isInvalid={Boolean(error)}
+          aria-describedby="pledge-character-count"
           placeholder="I will sort my household waste every week..."
         />
-        <div className={`char-count ${text.length > LIMIT ? "over" : ""}`}>
+        <div id="pledge-character-count" className={`char-count ${text.length > LIMIT ? "over" : ""}`} aria-live="polite">
           {text.length}/{LIMIT}
         </div>
       </Form.Group>
