@@ -1,0 +1,26 @@
+{
+  "name": "CleanCity+ Interactive Waste Management Tracker",
+  "short_name": "CleanCity+",
+  "description": "Track recycling activity, learn waste categories, visualize impact, and make cleaner-city pledges.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eef4f7",
+  "theme_color": "#16c7b7",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

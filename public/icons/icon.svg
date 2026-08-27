@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">CleanCity+ app icon</title>
+  <desc id="desc">A modern recycling mark over a clean city grid.</desc>
+  <defs>
+    <linearGradient id="sky" x1="68" y1="54" x2="452" y2="462" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16c7b7"/>
+      <stop offset="0.54" stop-color="#2534a5"/>
+      <stop offset="1" stop-color="#ff6f61"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="126" y1="144" x2="390" y2="390" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b7f46e"/>
+      <stop offset="1" stop-color="#38e6d2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#101a26"/>
+  <path fill="url(#sky)" d="M96 372V164c0-37.6 30.4-68 68-68h184c37.6 0 68 30.4 68 68v208H96Z" opacity="0.92"/>
+  <path fill="#fff" fill-opacity="0.16" d="M138 362V172h40v190h-40Zm69 0V139h48v223h-48Zm81 0V196h42v166h-42Zm72 0V158h32v204h-32Z"/>
+  <path fill="url(#leaf)" d="M252.8 388.5c-52.4 0-95.2-42.5-95.2-94.8 0-35.1 19.2-65.8 47.6-82.2l-18.4-31.7c-4.1-7.1 1-16 9.2-16h83.2c8.2 0 13.3 8.9 9.2 16l-41.6 72.1c-4.1 7.1-14.3 7.1-18.4 0l-11.7-20.2c-16.2 10.7-26.9 29.1-26.9 50 0 33.2 26.9 60.1 60.1 60.1 14.4 0 27.7-5 38.1-13.5l19 31.3c-15.3 18.1-38.2 28.9-53.2 28.9Z"/>
+  <path fill="#f8fbfc" d="M343.3 210.7c-17.4-17.2-41.1-27.8-67.3-27.8-12.2 0-24 2.3-34.8 6.5l20.7 30.2c4.4-0.9 9.1-1.4 13.9-1.4 33.2 0 60.1 26.9 60.1 60.1 0 7.9-1.5 15.4-4.3 22.3l-23.2-13.4c-7.1-4.1-16 1-16 9.2v83.2c0 8.2 8.9 13.3 16 9.2l72.1-41.6c7.1-4.1 7.1-14.3 0-18.4l-17.1-9.9c6.2-12.4 9.7-26.3 9.7-41.1 0-26.2-10.6-49.9-29.8-67.1Z" opacity="0.94"/>
+</svg>
