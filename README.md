@@ -80,5 +80,9 @@ Current test coverage proves localStorage persistence, tracker validation, recyc
 
 - GitHub repository with the complete source code.
 - Live demo deployed on Vercel or Netlify.
-- Screenshots or GIFs showing tracker add/edit/delete, chart updates, badge unlock, and pledge submission.
+- Screenshots or GIFs showing tracker add/edit/delete, chart updates, badge unlock, and pledge submission. Current screenshots are saved in `docs/screenshots`.
 - Passing lint, tests, and production build before submission.
+
+## QA Evidence
+
+See `docs/qa-report.md` for the latest production checks, responsive matrix, interaction flow notes, and screenshot list.
