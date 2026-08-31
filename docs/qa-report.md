@@ -5,6 +5,7 @@
 - `npm run lint` passed.
 - `npm test -- --runInBand` passed with 6 test suites and 10 tests.
 - `npm run build` passed with all app routes prerendered successfully.
+- Vercel production deployment is live at https://cleancity-plus-eight.vercel.app.
 
 ## Responsive Matrix
 

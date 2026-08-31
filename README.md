@@ -66,6 +66,10 @@ npm run dev
 
 Open `http://localhost:3000` in a browser.
 
+## Live Demo
+
+CleanCity+ is deployed on Vercel: https://cleancity-plus-eight.vercel.app
+
 ## Quality Checks
 
 ```bash
@@ -79,7 +83,7 @@ Current test coverage proves localStorage persistence, tracker validation, recyc
 ## Final Submission Checklist
 
 - GitHub repository with the complete source code.
-- Live demo deployed on Vercel or Netlify.
+- Live demo deployed on Vercel.
 - Screenshots or GIFs showing tracker add/edit/delete, chart updates, badge unlock, and pledge submission. Current screenshots are saved in `docs/screenshots`.
 - Passing lint, tests, and production build before submission.
 
