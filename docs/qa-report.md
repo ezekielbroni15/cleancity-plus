@@ -20,9 +20,9 @@ All checked routes had a main landmark, labelled visible form controls, reachabl
 ## Interaction Flows
 
 - Tracker validation shows an error before invalid entries are added.
-- Adding 12 Glass items updates the table, chart, and 10+ badge state.
-- Editing the Glass quantity opens the shared confirmation dialog and saves the updated quantity.
-- Deleting the Glass entry opens the shared confirmation dialog and shows feedback after deletion.
+- Adding 12 items updates the table, chart, and 10+ badge state.
+- Editing the item quantity opens the shared confirmation dialog and saves the updated quantity.
+- Deleting the item opens the shared confirmation dialog and shows feedback after deletion.
 - Submitting a pledge adds it to the pledge list and keeps the character count linked to the textarea.
 
 ## Screenshot Evidence
