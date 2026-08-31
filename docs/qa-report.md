@@ -29,7 +29,10 @@ All checked routes had a main landmark, labelled visible form controls, reachabl
 ## Screenshot Evidence
 
 - `docs/screenshots/home-laptop.png`
+- `docs/screenshots/waste-categories.png`
+- `docs/screenshots/tracker-empty.png`
 - `docs/screenshots/tracker-chart-badge.png`
+- `docs/screenshots/tracker-badge-unlocked.png`
 - `docs/screenshots/tracker-edit-confirm.png`
 - `docs/screenshots/tracker-delete-confirm.png`
 - `docs/screenshots/tracker-after-delete.png`
