@@ -10,8 +10,9 @@ export default function PledgeList({ pledges }) {
         <EmptyState icon={MessageSquareHeart} title="No pledges yet." message="Be the first person to add one." />
       ) : (
         <div className="pledge-stack">
-          {pledges.map((pledge) => (
+          {pledges.map((pledge, index) => (
             <article key={pledge.id} className="pledge-card">
+              <span className="pledge-index">{String(index + 1).padStart(2, "0")}</span>
               <p>{pledge.text}</p>
               <time dateTime={pledge.createdAt}>{new Date(pledge.createdAt).toLocaleString()}</time>
             </article>

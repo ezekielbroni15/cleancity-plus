@@ -40,19 +40,21 @@ export default function RecyclingTrackerPage() {
   return (
     <main id="main-content" className="page-shell" tabIndex={-1}>
       <Container fluid="xxl">
-        <header className="page-header tracker-header">
+        <header className="page-header tracker-header dashboard-hero">
           <div>
-            <span className="eyebrow">Impact dashboard</span>
-            <h1>Recycling Tracker</h1>
+            <span className="eyebrow">Impact dashboard / Live data</span>
+            <h1>Recycling<br />Tracker</h1>
             <p>Track items by category and unlock badges when totals cross 10 items.</p>
           </div>
           <div className="total-chip">
+            <span className="total-pulse" aria-hidden="true" />
             <strong>{log.totalItems}</strong>
-            <span>items recycled</span>
+            <span>total items recycled</span>
           </div>
         </header>
 
         <div className="tracker-command-row">
+          <span>Local data / Updates instantly</span>
           <ExportCsvButton
             entries={log.entries}
             onExport={() => showNotice("Tracker logs exported as CSV.")}
@@ -64,7 +66,7 @@ export default function RecyclingTrackerPage() {
 
         <section className="summary-grid" aria-label="Category badge progress">
           {log.categoryTotals.map((item) => (
-            <article key={item.category} className="summary-card">
+            <article key={item.category} className="summary-card" data-category={item.category.toLowerCase()}>
               {item.total >= 10 && <Badge label="10+ earned" />}
               <span>{item.category}</span>
               <strong>{item.total}</strong>

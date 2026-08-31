@@ -16,11 +16,17 @@ export default function Chart({ data }) {
       {hasData ? (
         <ResponsiveContainer width="100%" height={320}>
           <BarChart data={data} margin={{ top: 18, right: 12, left: -18, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(16, 26, 38, 0.1)" />
+            <defs>
+              <linearGradient id="impactBar" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#dfff4f" />
+                <stop offset="100%" stopColor="#26e6c8" />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="2 8" vertical={false} stroke="rgba(113, 136, 130, 0.2)" />
             <XAxis dataKey="category" tickLine={false} axisLine={false} />
             <YAxis allowDecimals={false} tickLine={false} axisLine={false} />
-            <Tooltip cursor={{ fill: "rgba(22, 199, 183, 0.08)" }} />
-            <Bar dataKey="total" name="Items recycled" radius={[8, 8, 0, 0]} fill="#16c7b7" />
+            <Tooltip cursor={{ fill: "rgba(38, 230, 200, 0.06)" }} contentStyle={{ borderRadius: 6, border: "1px solid rgba(113, 136, 130, .2)" }} />
+            <Bar dataKey="total" name="Items recycled" radius={[4, 4, 0, 0]} fill="url(#impactBar)" animationDuration={900} />
           </BarChart>
         </ResponsiveContainer>
       ) : (

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import { Shuffle } from "lucide-react";
+import { Quote, Shuffle } from "lucide-react";
 import { facts } from "@/data/facts";
 
 export default function FactGenerator() {
@@ -20,11 +20,13 @@ export default function FactGenerator() {
 
   return (
     <section className="fact-panel" aria-live="polite">
-      <span className="eyebrow">Did You Know?</span>
-      <p>{facts[factIndex]}</p>
-      <Button className="icon-button" onClick={nextFact}>
-        <Shuffle aria-hidden="true" size={17} />
-        New fact
+      <div className="fact-mark" aria-hidden="true"><Quote size={28} /></div>
+      <div className="fact-content">
+        <span className="eyebrow">Did You Know?</span>
+        <p>{facts[factIndex]}</p>
+      </div>
+      <Button className="fact-button" onClick={nextFact} aria-label="New fact">
+        <Shuffle aria-hidden="true" size={18} />
       </Button>
     </section>
   );

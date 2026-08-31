@@ -11,15 +11,15 @@ export default function PledgePage() {
   return (
     <main id="main-content" className="page-shell" tabIndex={-1}>
       <Container fluid="xxl">
-        <header className="page-header tracker-header">
+        <header className="page-header pledge-hero">
           <div>
-            <span className="eyebrow">Cleaner habits</span>
-            <h1>Pledge</h1>
-            <p>Write a simple promise that supports better recycling behavior.</p>
+            <span className="eyebrow">Cleaner habits / Shared momentum</span>
+            <h1>Make it<br />a promise.</h1>
+            <p>Write one clear commitment that moves better recycling behavior from intention into action.</p>
           </div>
           <div className="total-chip pledge-total">
             <strong>{pledgeCount}</strong>
-            <span>total pledges</span>
+            <span>promises in motion</span>
           </div>
         </header>
         <section className="pledge-layout">

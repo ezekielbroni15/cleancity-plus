@@ -23,13 +23,21 @@ export default function Navbar() {
           <span className="brand-mark">
             <Leaf aria-hidden="true" size={19} />
           </span>
-          <span>CleanCity+</span>
+          <span className="brand-copy">
+            <strong>CleanCity+</strong>
+            <small>Urban impact system</small>
+          </span>
         </Link>
         <BsNavbar.Toggle aria-controls="main-navigation" />
         <BsNavbar.Collapse id="main-navigation">
           <Nav className="ms-auto nav-links">
             {links.map(({ href, label, icon: Icon }) => (
-              <Link key={href} href={href} className={`nav-link ${pathname === href ? "active" : ""}`}>
+              <Link
+                key={href}
+                href={href}
+                aria-current={pathname === href ? "page" : undefined}
+                className={`nav-link ${pathname === href ? "active" : ""}`}
+              >
                 <Icon aria-hidden="true" size={16} />
                 {label}
               </Link>
